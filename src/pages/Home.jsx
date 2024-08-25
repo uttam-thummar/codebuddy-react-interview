@@ -49,17 +49,30 @@ const Home = () => {
   const CurrentStepForm = () => {
     switch (currentFormStep) {
       case 1:
-        return <Form1 handleSave={handleSave} handleSaveAndNext={handleSaveAndNext} />;
+        return (
+          <Form1
+            currentFormStep={currentFormStep}
+            handleSave={handleSave}
+            handleSaveAndNext={handleSaveAndNext}
+          />
+        );
       case 2:
         return (
           <Form2
+            currentFormStep={currentFormStep}
             handleBack={handleBack}
             handleSave={handleSave}
             handleSaveAndNext={handleSaveAndNext}
           />
         );
       case 3:
-        return <Form3 handleBack={handleBack} handleSave={handleSave} />;
+        return (
+          <Form3
+            currentFormStep={currentFormStep}
+            handleBack={handleBack}
+            handleSave={handleSave}
+          />
+        );
       default:
         return <></>;
     }

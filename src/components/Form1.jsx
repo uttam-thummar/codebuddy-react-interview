@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Icon } from "@iconify/react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import FormButtons from "./FormButtons";
 
-const Form1 = ({ handleSave, handleSaveAndNext }) => {
+const Form1 = ({ currentFormStep, handleSave, handleSaveAndNext }) => {
   const emailRegx = /^([a-z0-9.-]+)@([a-z0-9-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
   const passwordRegex =
     /^(?=(?:.*[A-Z]){2})(?=(?:.*[a-z]){2})(?=(?:.*[0-9]){2})(?=(?:.*[!@#$%^&*(),.?":{}|<>]){2}).{8,}$/;
@@ -63,7 +64,7 @@ const Form1 = ({ handleSave, handleSaveAndNext }) => {
             </div>
           )}
           <div className="absolute right-3 top-12 cursor-pointer text-gray-400">
-            <Icon icon="basil:envelope-outline" className="text-[30px]" />
+            <Icon icon="basil:envelope-outline" className="text-3xl" />
           </div>
         </div>
         <div className="relative">
@@ -93,47 +94,25 @@ const Form1 = ({ handleSave, handleSaveAndNext }) => {
             onClick={togglePasswordVisibility}
           >
             {passwordVisible ? (
-              <Icon icon="pepicons-pencil:eye-off" className="text-[30px]" />
+              <Icon icon="pepicons-pencil:eye-off" className="text-3xl" />
             ) : (
-              <Icon icon="pepicons-pencil:eye" className="text-[30px]" />
+              <Icon icon="pepicons-pencil:eye" className="text-3xl" />
             )}
           </div>
         </div>
-        <div>
-          <div className="mt-8 flex justify-between gap-8">
-            <div className="w-1/3">
-              <button
-                type="button"
-                disabled
-                className="w-full rounded-lg border border-solid border-gray-300 bg-white py-3 text-sm font-semibold text-gray-700 transition duration-300 hover:bg-gray-300 disabled:opacity-50 disabled:hover:bg-white sm:text-base"
-              >
-                Back
-              </button>
-            </div>
-            <div className="flex flex-1 flex-col items-end gap-1 sm:flex-row">
-              <button
-                type="button"
-                onClick={handleClickSave}
-                className="w-full max-w-[200px] rounded-lg border border-solid border-transparent bg-teal-500 py-3 text-sm font-semibold text-white shadow-md transition duration-300 hover:bg-teal-600 sm:text-base"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                onClick={handleClickSaveAndNext}
-                className="w-full max-w-[200px] rounded-lg border border-solid border-transparent bg-indigo-500 py-3 text-sm font-semibold text-white shadow-md transition duration-300 hover:bg-indigo-600 sm:text-base"
-              >
-                Save & Next
-              </button>
-            </div>
-          </div>
-        </div>
+        <FormButtons
+          currentFormStep={currentFormStep}
+          handleBack={() => {}}
+          handleSave={handleClickSave}
+          handleSaveAndNext={handleClickSaveAndNext}
+        />
       </form>
     </>
   );
 };
 
 Form1.propTypes = {
+  currentFormStep: PropTypes.number.isRequired,
   handleSave: PropTypes.func.isRequired,
   handleSaveAndNext: PropTypes.func.isRequired,
 };
